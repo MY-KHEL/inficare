@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>
+    <div className="overflow-hidden max-w-[100dvw]">
       <HeroSection />
       <ExploreSection />
       <DoctorSection/>

@@ -25,7 +25,7 @@ export function NavBar() {
   ];
 
   return (
-    <nav className="py-2.5 bg-white max-md:rounded-[10px] md:rounded-b-[15px] fixed w-full z-50 flex justify-between px-5 xl:px-22.5 items-center">
+    <nav className="py-2.5 bg-white max-md:rounded-b-[10px] md:rounded-b-[15px] fixed w-full max-w-[100dvw] z-50 flex justify-between px-5 xl:px-22.5 items-center">
       <h1 className="font-bold text-xl  xl:text-3xl leading-[100%]  bg-linear-to-b bg-clip-text text-transparent from-[#2563EB] to-[#14B8A6] ">Infi-Care</h1>
       <div className=" hidden md:flex gap-12.5 items-center">
         {navLinks.map((link, index) => (
