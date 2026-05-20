@@ -16,15 +16,15 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 export function TestimonialSection() {
   const plugin = React.useRef(
     AutoScroll({ stopOnMouseEnter: false, speed: 1 }),
   );
- const imageRef = React.useRef<HTMLDivElement | null>(null)
- const textRef = React.useRef<HTMLParagraphElement | null>(null)
+  const imageRef = React.useRef<HTMLDivElement | null>(null);
+  const textRef = React.useRef<HTMLParagraphElement | null>(null);
+  const testimonialRef = React.useRef<HTMLDivElement | null>(null);
 
   const testimonials = [
     {
@@ -65,46 +65,62 @@ export function TestimonialSection() {
     <Paragraph>Real experiences from people using Infi-Care</Paragraph>
   );
 
-React.useEffect(() => {
-  if (!imageRef.current) return;
-   const tl = gsap.timeline()
-  const units = gsap.utils.toArray(imageRef.current.children);
+  React.useEffect(() => {
+    if (!imageRef.current) return;
 
-  gsap.fromTo(
-    units,
-    {
-      opacity: 0,
-      y: -40,
-    },
-    {
-      opacity: 1,
-      y: 0,
-      stagger: 0.2,
-      ease: "power3.out",
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: imageRef.current,
         start: "top 65%",
-        end:"top 60%",
+        end: "top 60%",
         scrub: true,
       },
-    }
-  )
-  gsap.fromTo(textRef.current,{
-    opacity:0,
-    y:-20,
-   
-  },{
-    opacity:1,
-    y:0,
-    delay:1,
-    
-    scrollTrigger:{
-      trigger: imageRef.current,
-      scrub:true,
+    });
+    const units = gsap.utils.toArray(imageRef.current.children);
 
-    }
-  })
-}, []);
+    tl.fromTo(
+      units,
+      {
+        opacity: 0,
+        y: -40,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
+        ease: "power3.out",
+      },
+    );
+    tl.fromTo(
+      textRef.current,
+      {
+        opacity: 0,
+        y: -20,
+      },
+      {
+        opacity: 1,
+        y: 0,
+      },
+    );
+
+    gsap.fromTo(
+      testimonialRef.current,
+      {
+        opacity: 0,
+        scale: 0.7,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        scrollTrigger: {
+          trigger: testimonialRef.current,
+          start: "top 65%",
+          end: "top 60%",
+          scrub: true,
+        },
+      },
+    );
+  }, []);
   return (
     <>
       <section className=" relative  overflow-hidden py-[51px] md:py-[78px] pl-5 md:px-[90px]  max-md:gap-[30px] gap-[97px] flex max-md:flex-col w-full md:items-center">
@@ -132,7 +148,10 @@ React.useEffect(() => {
             </Paragraph>
           </div>
         </div>
-        <div className="md:max-w-[697px] z-20 max-md:hidden w-full overflow-auto flex max-md:pr-5  md:grid grid-cols-2 gap-[14px] md:gap-9  ">
+        <div
+          className="md:max-w-[697px] z-20 max-md:hidden w-full overflow-auto flex max-md:pr-5  md:grid grid-cols-2 gap-[14px] md:gap-9   "
+          ref={testimonialRef}
+        >
           {testimonials.map((testimonial, index) => (
             <div
               className="p-5 flex flex-col gap-3 md:gap-[35px] justify-between max-md:min-w-[247px]  md:max-w-[331px]  w-full  bg-white rounded-[15px] border-[0.5px] border-[#8E98A8B2]"

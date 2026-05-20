@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import {
   CrossIcon,
@@ -7,9 +8,19 @@ import {
   TwitterIcon,
 } from "../ui/icons";
 import { Button, Heading, Paragraph } from "../ui/typography";
-import React from "react";
+import React, { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { start } from "repl";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+
+gsap.registerPlugin(ScrollTrigger)
 export function FooterSection() {
+  const headingRef = useRef<HTMLHeadingElement | null> (null)
+  const textRef =useRef<HTMLParagraphElement | null>(null)
+  const formRef =useRef<HTMLDivElement | null> (null)
+  const footerRef = useRef<HTMLDivElement| null>(null)
     const year = new Date().getFullYear();
   const SocialIcons = [
     {
@@ -30,19 +41,70 @@ export function FooterSection() {
     },
     
   ];
+
+  useGSAP(()=>{
+     const tl = gsap.timeline({
+        scrollTrigger:{
+            trigger:headingRef.current,
+            start:"top 80%",
+            end: "+=200",
+            scrub:true,
+            // markers:true
+          
+        }
+      })
+
+
+      tl.fromTo(
+        headingRef.current,{
+          opacity:0,
+          x:-200
+        },
+        {
+          opacity:1,
+          x:0
+        }
+      ).fromTo(
+        textRef.current,{
+          opacity:0,
+          x:200
+        },
+        {
+          opacity:1,
+          x:0
+        }).fromTo(
+        formRef.current,{
+          opacity:0,
+          y:20
+        },
+        {
+          opacity:1,
+          y:0
+        }).fromTo(
+        footerRef.current,{
+          opacity:0,
+          y:20
+        },
+        {
+          opacity:1,
+          y:0
+        })
+
+
+  },[])
   return (
     <section className=" bg-white">
       <div className="md:px-22.5 px-5 md:py-16 py-[41px] w-full flex gap-7.5 flex-col md:gap-8 items-center">
         <div className=" max-w-[353px] md:max-w-[384px] flex flex-col gap-2.5 md:gap-3">
-          <h1 className="text-[20px] md:text-[24px] text-center font-semibold text-[#061A46]">
+          <h1 className="text-[20px] md:text-[24px] text-center font-semibold text-[#061A46]" ref={headingRef}>
             Subscribe to our newsletter
           </h1>
-          <Paragraph className="text-center max-md:text-[12px] text-[14px]">
+          <Paragraph className="text-center max-md:text-[12px] text-[14px]" ref={textRef}>
             InfiCare connects you to trusted doctors and helps you manage your
             health anytime, anywhere.
           </Paragraph>
         </div>
-        <div className="flex w-full items-center justify-center ">
+        <div className="flex w-full items-center justify-center " ref={formRef}>
           <form action="" className="flex w-full justify-center  max-md:flex-col gap-4 items-center">
             <input
               type="email"
@@ -53,7 +115,7 @@ export function FooterSection() {
           </form>
         </div>
       </div>
-      <div className="md:border-t-2 flex flex-col justify-between gap-4 md:gap-16 w-full md:border-[#E4E7EC] max-md:pb-12.5 md:pt-[32px] md:pb-[61px] md:px-[90px]">
+      <div className="md:border-t-2 flex flex-col justify-between gap-4 md:gap-16 w-full md:border-[#E4E7EC] max-md:pb-12.5 md:pt-[32px] md:pb-[61px] md:px-[90px]" ref={footerRef}>
         <div className="flex max-md:flex-col w-full gap-4.5 justify-between items-center">
           <div className="flex gap-2.5  items-center">
             <CrossIcon />
