@@ -22,9 +22,11 @@ export function TestimonialSection() {
   const plugin = React.useRef(
     AutoScroll({ stopOnMouseEnter: false, speed: 1 }),
   );
-  const imageRef = React.useRef<HTMLDivElement | null>(null);
+  const desktopAvatarRef = React.useRef<HTMLDivElement | null>(null);
+  const mobileAvatarRef = React.useRef<HTMLDivElement | null>(null);
   const textRef = React.useRef<HTMLParagraphElement | null>(null);
   const testimonialRef = React.useRef<HTMLDivElement | null>(null);
+  const mobileTextRef = React.useRef<HTMLParagraphElement | null>(null);
 
   const testimonials = [
     {
@@ -66,43 +68,40 @@ export function TestimonialSection() {
   );
 
   React.useEffect(() => {
-    if (!imageRef.current) return;
+    const animateAvatars = (
+  avatarRef: HTMLDivElement | null,
+  textRef: HTMLParagraphElement | null,
+) => {
+      if (!avatarRef) return;
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: avatarRef,
+          start: "top 85%",
+          end:"+=300",
+          scrub: true,
+        },
+      });
+      tl.fromTo(
+        avatarRef.children,
+        {
+          opacity: 0,
+          y: -30,
+          scale: 0.8,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.15,
+          duration: 0.6,
+          ease: "power3.out",
+        },
+      ).fromTo(textRef, { opacity: 0, y: -20 }, { opacity: 1, y: 0 });
+    };
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: imageRef.current,
-        start: "top 65%",
-        end: "top 60%",
-        scrub: true,
-      },
-    });
-    const units = gsap.utils.toArray(imageRef.current.children);
+  animateAvatars(desktopAvatarRef.current, textRef.current);
 
-    tl.fromTo(
-      units,
-      {
-        opacity: 0,
-        y: -40,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 1,
-        ease: "power3.out",
-      },
-    );
-    tl.fromTo(
-      textRef.current,
-      {
-        opacity: 0,
-        y: -20,
-      },
-      {
-        opacity: 1,
-        y: 0,
-      },
-    );
-
+animateAvatars(mobileAvatarRef.current, mobileTextRef.current);
     gsap.fromTo(
       testimonialRef.current,
       {
@@ -123,12 +122,12 @@ export function TestimonialSection() {
   }, []);
   return (
     <>
-      <section className=" relative  overflow-hidden py-[51px] md:py-[78px] pl-5 md:px-[90px]  max-md:gap-[30px] gap-[97px] flex max-md:flex-col w-full md:items-center">
+      <section className=" relative  overflow-hidden py-[51px] xl:py-[78px] pl-5 xl:px-[90px]  max-xl:gap-[30px] gap-[97px] flex max-md:flex-col w-full md:items-center">
         <div className="flex md:hidden flex-col z-20 max-md:gap-[15px] gap-[47px]">
           <Heading title="Trusted by people like you" subHeading={subHeading} />
 
           <div className="flex gap-2.5">
-            <div className="flex " ref={imageRef}>
+            <div className="flex " ref={mobileAvatarRef}>
               {testimonials.map((testimonial, index) => (
                 <div
                   className={` ${index < 1 ? "ml-0" : "-ml-4"} w-12.5 relative aspect-square rounded-full bg-[#2563EB] `}
@@ -143,32 +142,32 @@ export function TestimonialSection() {
                 </div>
               ))}
             </div>
-            <Paragraph className="font-semibold " ref={textRef}>
+            <Paragraph className="font-semibold " ref={mobileTextRef}>
               More than 500+ <br /> Trusted Infi-Care{" "}
             </Paragraph>
           </div>
         </div>
         <div
-          className="md:max-w-[697px] z-20 max-md:hidden w-full overflow-auto flex max-md:pr-5  md:grid grid-cols-2 gap-[14px] md:gap-9  p-2  "
+          className="md:max-w-[435px] xl:max-w-[697px] z-20 max-md:hidden w-full overflow-auto flex max-md:pr-5  md:grid grid-cols-2 gap-[14px] md:gap-9  p-2  "
           ref={testimonialRef}
         >
           {testimonials.map((testimonial, index) => (
             <div
-              className="p-5 flex flex-col gap-3 md:gap-[35px] justify-between max-md:min-w-[247px]  md:max-w-[331px]  w-full  hover:shadow-md shadow-blue-500/70  bg-white rounded-[15px] border-[0.5px] border-[#8E98A8B2] cursor-pointer hover:border-none"
+              className="p-5 flex flex-col gap-3  xl:gap-[35px] justify-between aspect-square max-w-[240px] xl:max-w-[331px] max-xl:min-h-60  w-full  hover:shadow-md shadow-blue-500/70  bg-white rounded-[15px] border-[0.5px] border-[#8E98A8B2] cursor-pointer hover:border-none"
               key={index}
             >
-              <div className="flex flex-col gap-[25px]">
+              <div className="flex flex-col gap-3 xl:gap-[25px]">
                 <div className="flex justify-between">
                   <ApostropheIcon />
 
                   {testimonial.isFiveStars ? <FiveStars /> : <FourStars />}
                 </div>
-                <h3 className="font-semibold max-md:text-[12px] text-[#061A46B2]">
+                <h3 className="font-semibold max-xl:text-[12px] text-[#061A46B2]">
                   {testimonial.content}
                 </h3>
               </div>
               <div className="flex gap-2.5 items-center">
-                <div className="w-[70px] max-md:w-[35px] relative aspect-square  ">
+                <div className="w-[70px] max-xl:w-[35px] relative aspect-square  ">
                   <Image
                     src={testimonial.imageLink}
                     alt="first-doctor"
@@ -177,10 +176,10 @@ export function TestimonialSection() {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5 md:gap-2.5">
-                  <p className="text-[#64748B] max-md:text-[14px]">
+                  <p className="text-[#64748B] max-xl:text-[14px]">
                     {testimonial.author}
                   </p>
-                  <p className="text-[#64748B] max-md:text-[12px]">
+                  <p className="text-[#64748B] max-xl:text-[12px]">
                     {testimonial.location}
                   </p>
                 </div>
@@ -192,7 +191,7 @@ export function TestimonialSection() {
           <Heading title="Trusted by people like you" subHeading={subHeading} />
 
           <div className="flex gap-2.5">
-            <div className="flex" ref={imageRef}>
+            <div className="flex" ref={desktopAvatarRef}>
               {testimonials.map((testimonial, index) => (
                 <div
                   className={` ${index < 1 ? "ml-0" : "-ml-4"} w-12.5 relative aspect-square rounded-full bg-[#2563EB] `}

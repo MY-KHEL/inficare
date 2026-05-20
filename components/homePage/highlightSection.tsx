@@ -93,7 +93,7 @@ useEffect(() => {
   }
 }, []);
   return (
-    <section className="px-[20px] md:px-[79px] relative py-[25px] md:py-22.5 flex max-md:flex-col gap-7.5 md:justify-between items-center overflow-hidden">
+    <section className="px-[20px] xl:px-[79px] relative py-[25px] md:px-9 md:py-[65px] xl:py-22.5 flex max-md:flex-col gap-7.5 md:justify-between items-center overflow-hidden">
       <div className="max-w-[518px] w-full flex flex-col gap-9">
         <Heading
           title="Your health records, always within reach"

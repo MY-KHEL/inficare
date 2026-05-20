@@ -90,12 +90,13 @@ export function ExploreSection() {
     scrollTrigger: {
       trigger: exploreRef.current,
       start: "top 80%",
+      end:"+=300",
       scrub:true
     },
   });
 }, []);
   return (
-    <section className=" py-13 md:py-[79px] relative overflow-hidden px-5 md:px-[95px] flex max-md:flex-col max-md:gap-[24px] gap-[57px] 2xl:justify-center items-center  ">
+    <section className=" py-13 xl:py-[79px] relative overflow-hidden px-5 md:py-9  xl:px-[95px] flex max-md:flex-col max-md:gap-[24px] gap-[57px] 2xl:justify-center md:items-start xl:items-center  ">
       <Heading
         title="Explore what you can do with "
         subHeading={subHeading}
@@ -134,10 +135,10 @@ export function ExploreSection() {
                 {feature.icon}
               </div>
               <div className="flex flex-col w-full  max-md:gap-[7px] gap-2.5 ">
-                <h3 className="text-[#061A46CC]  max-md:text-[14px]  font-semibold">
+                <h3 className="text-[#061A46CC]  max-xl:text-[14px]  font-semibold">
                   {feature.title}
                 </h3>
-                <Paragraph className="font-medium">
+                <Paragraph className="font-medium max-xl:text-[12px]">
                   {feature.subTitle}
                 </Paragraph>
               </div>

@@ -4,6 +4,7 @@ import React from "react";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Noto_Sans_Khmer } from "next/font/google";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,13 +114,13 @@ export const Heading = ({
   return (
     <div
       className={cn(
-        "flex flex-col max-md:gap-[6px] gap-[10px] text-[#061A46] ",
+        "flex flex-col max-md:gap-[6px] gap-[10px]  text-[#061A46] ",
         className,
       )}
       ref={ref}
     >
       <h1
-        className="text-[20px] md:text-[38px] font-mona font-semibold"
+        className="text-[20px]  xl:text-[38px] font-mona font-semibold"
         ref={headingRef}
       >
         {title}
@@ -134,11 +135,11 @@ export const Heading = ({
         )}
       </h1>
 
-      <div className="text-medium text-[#64748B] max-md:text-[12px]" ref={subHeadingRef}>
+      <div className="text-medium text-[#64748B] max-xlext-[12px]" ref={subHeadingRef}>
         {subHeading}
       </div>
     </div>
-  );
+  );                     
 };
 
 export const Button = ({

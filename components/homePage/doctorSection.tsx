@@ -77,7 +77,7 @@ export function DoctorSection() {
     },
   ];
   return (
-    <section className="px-5 md:px-[90px] py-[37.5px] md:py-[79px] relative overflow-hidden flex flex-col gap-[50px]">
+    <section className="px-5 md:px-9 xl:px-[90px] py-[37.5px] xl:py-[79px] relative overflow-hidden flex flex-col gap-[50px]">
       <div className="flex  z-20  flex-col gap-[35px]">
         <div className="flex max-md:flex-col gap-[15px] md:justify-between md:items-center">
           <Heading
@@ -85,12 +85,12 @@ export function DoctorSection() {
             subHeading="Connect with experienced, verified doctors across a wide range of medical fields."
             logo
           />
-          <div className="flex gap-2.5 items-center max-md:ml-auto max-md:rounded-[5px] rounded-[15px] bg-[#DAE4FC] max-md:px-[11.5px] w-fit max-md:py-[10px] px-[22.5px] py-[16.5px]">
+          <div className="flex gap-2.5 items-center max-md:ml-auto max-md:rounded-[5px] rounded-[15px] bg-[#DAE4FC] max-lg:px-[11.5px] w-fit max-lg:py-[10px] px-[22.5px] py-[16.5px]">
             <div className="aspect-square  max-md:w-[5px] w-2.5 bg-[#2563EB] rounded-full"></div>
-            <p className="text-[#061A46] max-md:text-[10px] font-semibold">Trusted Specialists</p>
+            <p className="text-[#061A46] max-md:text-[10px] md:text-[12px] xl:text-[16px] font-semibold">Trusted Specialists</p>
           </div>
         </div>
-        <div className="flex max-md:hidden gap-[22px] p-4 justify-between w-full overflow-x-auto">
+        <div className="flex  max-md:hidden gap-[22px] p-4 justify-between w-full overflow-x-auto">
           {doctorProfiles.map((profile, index) => (
             <div className="rounded-[15px] bg-white hover:shadow-md shadow-blue-500/70 hover:scale-102 cursor-pointer " key={index}>
               <div className="relative aspect-298/322  h-full  max-h-[227px] md:max-h-[322px] w-[233px] md:w-[298px]">

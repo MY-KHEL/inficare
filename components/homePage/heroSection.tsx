@@ -18,9 +18,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
 
-
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrambleTextPlugin);
-
 
 export function HeroSection() {
   const heroLeftSection = useRef<HTMLDivElement | null>(null);
@@ -31,8 +29,10 @@ export function HeroSection() {
   const reviewSectionRef = useRef<HTMLDivElement | null>(null);
   const doctorProfileRef = useRef<HTMLDivElement | null>(null);
   const textRef = useRef<HTMLDivElement | HTMLParagraphElement | null>(null);
-  const mainTextRef = useRef<HTMLDivElement | HTMLParagraphElement | null>(null)
-  const element = useRef< HTMLSpanElement | null >(null);
+  const mainTextRef = useRef<HTMLDivElement | HTMLParagraphElement | null>(
+    null,
+  );
+  const element = useRef<HTMLSpanElement | null>(null);
   const heroTextRef = useRef<HTMLHeadingElement | null>(null);
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLDivElement | null>(null);
@@ -40,106 +40,114 @@ export function HeroSection() {
   let textTl = gsap.timeline();
   let imageTl = gsap.timeline();
   useGSAP(() => {
-gsap.fromTo(element.current, {
-  opacity: 0,
- 
-
- 
-},{
-  opacity: 1,
-  
-  duration: 2, 
-  delay: 1.3,
-  ease: "power2.out",
- 
-  scrambleText: {
-    text: "Minutes", 
-    chars: "dsfpah", 
-    revealDelay: 0, 
-    speed: 0.5, 
-    newClass: "myClass"
-  }
-});
-
-    textTl.fromTo(
-      textRef.current,{
+    gsap.fromTo(
+      element.current,
+      {
         opacity: 0,
-        y: 30,
-        scale:0.6
-      },{
-        opacity: 1, 
-        y: 0,
-        scale:1,
-        duration: 1,
+      },
+      {
+        opacity: 1,
 
-       },
-       
+        duration: 2,
+        delay: 1.3,
+        ease: "power2.out",
+
+        scrambleText: {
+          text: "Minutes",
+          chars: "dsfpah",
+          revealDelay: 0,
+          speed: 0.7,
+          newClass: "myClass",
+        },
+      },
+    );
+
+    textTl
+      .fromTo(
+        textRef.current,
+        {
+          opacity: 0,
+          y: 30,
+          scale: 0.6,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.7,
+        },
       )
       .fromTo(
-      heroTextRef.current,{
-        opacity: 0,
-        y: 30,
-        scale:0.6
-      },{
-        opacity: 1, 
-        y: 0,
-        scale:1,
-        duration: 1,
-
-       },
-      
-      ).fromTo(
-        mainTextRef.current,{
-        opacity: 0,
-        y: 30,
-        scale:0.6
-      },{
-        opacity: 1, 
-        y: 0,
-        scale:1,
-        duration: 1,
-
-       }
-       ).fromTo(
-        buttonRef.current,{
+        heroTextRef.current,
+        {
           opacity: 0,
-          y: -50,
-          ease:"bounce.out"
-         
-        },{
+          y: 30,
+          scale: 0.6,
+        },
+        {
           opacity: 1,
           y: 0,
-          
-        },"-=1"
-       ).fromTo(
-        dropDownRef.current,{
+          scale: 1,
+          duration: 0.5,
+        },
+      )
+      .fromTo(
+        mainTextRef.current,
+        {
           opacity: 0,
-          y: -50,
-          
-         
-        },{
+          y: 30,
+          scale: 0.6,
+        },
+        {
           opacity: 1,
           y: 0,
-          ease:"bounce.out"
-          
-        }
-       )
-    
-    
+          scale: 1,
+          duration: 1,
+        },
+      )
+      .fromTo(
+        buttonRef.current,
+        {
+          opacity: 0,
+          y: -50,
+          ease: "bounce.out",
+        },
+        {
+          opacity: 1,
+          y: 0,
+        },
+        "-=1",
+      )
+      .fromTo(
+        dropDownRef.current,
+        {
+          opacity: 0,
+          y: -50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "bounce.out",
+         
+        },
+         "-=1",
+      );
+
     mm.add("(min-width: 768px)", () => {
       if (heroLeftSection.current) {
-        imageTl.fromTo(
-          heroLeftSection.current,
-          {
-            opacity: 0,
-            scale: 0.2,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.4,
-          },
-        )
+        imageTl
+          .fromTo(
+            heroLeftSection.current,
+            {
+              opacity: 0,
+              scale: 0.2,
+            },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.4,
+            },
+          )
           .fromTo(
             heroImage.current,
             {
@@ -188,22 +196,21 @@ gsap.fromTo(element.current, {
               scale: 1,
               duration: 0.5,
             },
-             "-=1"
+            "-=1",
           )
           .fromTo(
             reviewSectionRef.current,
-            { 
+            {
               opacity: 0,
               scale: 0.5,
-              y:50
+              y: 50,
             },
             {
               opacity: 1,
               scale: 1,
               duration: 0.5,
-              y:0,
+              y: 0,
             },
-             
           )
           .fromTo(
             doctorProfileRef.current,
@@ -216,28 +223,26 @@ gsap.fromTo(element.current, {
               scale: 1,
               duration: 0.5,
             },
-             "-=1"
-          )
+            "-=1",
+          );
       }
     });
 
-     mm.add("(max-width: 767px)", () => {
+    mm.add("(max-width: 767px)", () => {
       if (heroLeftSection.current) {
-        imageTl.fromTo(
-          heroLeftSection.current,
-          {
-            opacity: 0,
-            scale: 0.2,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            duration:1
-            
-           
-
-          },
-        )
+        textTl
+          .fromTo(
+            heroLeftSection.current,
+            {
+              opacity: 0,
+              scale: 0.2,
+            },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+            },
+          )
           .fromTo(
             heroImage.current,
             {
@@ -261,13 +266,13 @@ gsap.fromTo(element.current, {
               opacity: 1,
               scale: 1,
               duration: 0.5,
-               scrollTrigger:{
-              trigger:phoneIconRef.current,
-              start: "top 75%",
-              end : "bottom 70%",
-              // markers:true,
-              scrub:true
-            }
+              scrollTrigger: {
+                trigger: phoneIconRef.current,
+                start: "top 75%",
+                end: "bottom 70%",
+                // markers:true,
+                scrub: true,
+              },
             },
           )
           .fromTo(
@@ -280,13 +285,13 @@ gsap.fromTo(element.current, {
               opacity: 1,
               scale: 1,
               duration: 0.5,
-              scrollTrigger:{
-              trigger:phoneIconRef.current,
-              start: "top 75%",
-              end : "bottom 70%",
-              // markers:true,
-              scrub:true
-            }
+              scrollTrigger: {
+                trigger: phoneIconRef.current,
+                start: "top 75%",
+                end: "bottom 70%",
+                // markers:true,
+                scrub: true,
+              },
             },
           )
           .fromTo(
@@ -299,37 +304,36 @@ gsap.fromTo(element.current, {
               opacity: 1,
               scale: 1,
               duration: 0.5,
-              scrollTrigger:{
-              trigger:emailIconRef.current,
-              start: "top 75%",
-              end : "bottom 70%",
-              // markers:true,
-              scrub:true
-            }
+              scrollTrigger: {
+                trigger: emailIconRef.current,
+                start: "top 75%",
+                end: "bottom 70%",
+                // markers:true,
+                scrub: true,
+              },
             },
-             "-=1"
+            "-=1",
           )
           .fromTo(
             reviewSectionRef.current,
-            { 
+            {
               opacity: 0,
               scale: 0.5,
-              y:50
+              y: 50,
             },
             {
               opacity: 1,
               scale: 1,
               duration: 0.5,
-              y:0,
-              scrollTrigger:{
-              trigger:reviewSectionRef.current,
-              start: "top 80%",
-              end : "bottom 50%",
-              // markers:true,
-              scrub:true
-            }
+              y: 0,
+              scrollTrigger: {
+                trigger: reviewSectionRef.current,
+                start: "top 80%",
+                end: "bottom 50%",
+                // markers:true,
+                scrub: true,
+              },
             },
-             
           )
           .fromTo(
             doctorProfileRef.current,
@@ -341,19 +345,22 @@ gsap.fromTo(element.current, {
               opacity: 1,
               scale: 1,
               duration: 1,
-              scrollTrigger:{
-              trigger:doctorProfileRef.current,
-              start: "top 75%",
-              end : "bottom 70%",
-              // markers:true,
-              scrub:true
-            }
+              scrollTrigger: {
+                trigger: doctorProfileRef.current,
+                start: "top 75%",
+                end: "bottom 70%",
+                // markers:true,
+                scrub: true,
+              },
             },
-             "-=1"
-          )
+            "-=1",
+          );
       }
-    });
-
+    })
+     
+ return () => {
+  mm.revert();
+  ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); }
   }, []);
   const features = [
     {
@@ -370,9 +377,9 @@ gsap.fromTo(element.current, {
     },
   ];
   return (
-    <section className=" px-5 xl:pl-[91px] relative justify-between overflow-hidden  min-h-[100dvh] flex max-lg:flex-col md:gap-4 ">
+    <section className=" px-5 xl:pl-[91px] relative justify-between overflow-hidden  min-h-[100dvh] flex max-md:flex-col md:gap-4 ">
       {/* Left hand text */}
-      <div className="flex w-full flex-col z-20 pt-20 gap-20 items-center xl:pt-30 md:pb-11.5 lg:max-w-[544px] justify-between ">
+      <div className="flex w-full flex-col z-20 pt-20 gap-20 items-center xl:pt-30 md:pb-11.5 gap-[13px] lg:max-w-[544px] justify-between ">
         {/* text and button container */}
         <div className="flex flex-col gap-[40px] ">
           {/* only text section */}
@@ -381,12 +388,20 @@ gsap.fromTo(element.current, {
               Consult top doctors anytime, from any location.
             </Paragraph>
 
-            <h1 className="font-bold text-2xl xl:text-[60px] max-lg:text-center tracking-normal font-mona text-[#061A46]" ref={heroTextRef}>
+            <h1
+              className="font-bold text-2xl xl:text-[60px] max-lg:text-center tracking-normal font-mona text-[#061A46]"
+              ref={heroTextRef}
+            >
               Talk to a verified doctor in{" "}
-              <span className="underline text-[#2563EB]" ref={element}>Minutes </span>{" "}
+              <span className="underline text-[#2563EB]" ref={element}>
+                Minutes{" "}
+              </span>{" "}
             </h1>
 
-            <Paragraph className="max-lg:text-[12px] max-lg:font-medium max-lg:text-center" ref={mainTextRef}>
+            <Paragraph
+              className="max-lg:text-[12px] max-lg:font-medium max-lg:text-center"
+              ref={mainTextRef}
+            >
               Access quality healthcare without long wait times or stress.
               Connect with verified doctors quickly and easily. Get the care you
               need — anytime, anywhere.
@@ -403,7 +418,10 @@ gsap.fromTo(element.current, {
         </div>
 
         {/* white secion near the bottom of the hero section */}
-        <div className="bg-white flex items-center justify-center rounded-[15px] gap-2 w-full p-2.5"  ref={dropDownRef}>
+        <div
+          className="bg-white flex items-center justify-center rounded-[15px] gap-2 w-full p-2.5"
+          ref={dropDownRef}
+        >
           {features.map((feature, index) => (
             <div
               key={index}
@@ -445,14 +463,23 @@ gsap.fromTo(element.current, {
           >
             <PhoneIcon width={24} height={24} className="max-md:w-3" />
           </div>
-          <div className="absolute right-10 top-40 md:right-0 md:top-75 md:w-12.5  w-[35px] flex justify-center items-center aspect-square rounded-full bg-white" ref={videoIconRef}>
+          <div
+            className="absolute right-10 top-40 md:right-0 md:top-75 md:w-12.5  w-[35px] flex justify-center items-center aspect-square rounded-full bg-white"
+            ref={videoIconRef}
+          >
             <VideoIcon width={24} height={24} className="max-md:w-5" />
           </div>
-          <div className="absolute md:left-12 top-65 md:top-100 w-[35px] md:w-12.5  flex justify-center items-center aspect-square rounded-full bg-white" ref={emailIconRef}>
+          <div
+            className="absolute md:left-12 top-65 md:top-100 w-[35px] md:w-12.5  flex justify-center items-center aspect-square rounded-full bg-white"
+            ref={emailIconRef}
+          >
             <EmailIcon width={24} height={24} className="max-md:w-5" />
           </div>
 
-          <div className="w-full absolute rounded-[15px]  bottom-6 md:bottom-50 shadow-md -left-4 md:-left-30 max-w-[190px] md:max-w-[241px] py-[7.5px] md:py-[13px] bg-white px-[9.5px] md:px-[29px]" ref={doctorProfileRef}>
+          <div
+            className="w-full absolute rounded-[15px]  bottom-6 md:bottom-50 shadow-md -left-4 md:-left-30 max-w-[190px] md:max-w-[241px] py-[7.5px] md:py-[13px] bg-white px-[9.5px] md:px-[29px]"
+            ref={doctorProfileRef}
+          >
             <div className="flex gap-3.5 items-center">
               <div className="w-12.5 relative aspect-square ">
                 <Image
@@ -473,7 +500,10 @@ gsap.fromTo(element.current, {
               </div>
             </div>
           </div>
-          <div className="flex flex-col shadow-md  items-center justify-center absolute right-0 md:right-5 bottom-9 md:bottom-20 bg-white/85 rounded-[15px] p-3 w-full max-w-[85px] md:max-w-[115px]" ref={reviewSectionRef}>
+          <div
+            className="flex flex-col shadow-md  items-center justify-center absolute right-0 md:right-5 bottom-9 md:bottom-20 bg-white/85 rounded-[15px] p-3 w-full max-w-[85px] md:max-w-[115px]"
+            ref={reviewSectionRef}
+          >
             <svg
               width="30"
               height="24"
@@ -502,4 +532,4 @@ gsap.fromTo(element.current, {
     </section>
   );
 }
-3;
+

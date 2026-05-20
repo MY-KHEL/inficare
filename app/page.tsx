@@ -5,11 +5,10 @@ import { FooterSection } from "@/components/homePage/footerSection";
 import { HeroSection } from "@/components/homePage/heroSection";
 import { HighlightSection } from "@/components/homePage/highlightSection";
 import { TestimonialSection } from "@/components/homePage/testimonialSection";
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="overflow-hidden max-w-[100dvw]">
+    <div className="overflow-hidden max-w-dvw">
       <HeroSection />
       <ExploreSection />
       <DoctorSection/>

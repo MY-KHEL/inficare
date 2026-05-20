@@ -43,7 +43,7 @@ export function CallToAction() {
     );
   }, []);
   return (
-    <section className="py-[47px] md:py-[70px] px-5 md:px-[90px] relative overflow-hidden">
+    <section className="py-[47px] xl:py-[70px] px-5 md:px-9 xl:px-[90px] relative overflow-hidden">
       <div className=" relative rounded-[15px] py-16 w-full px-[15px] md:px-16.5 flex  items-center aspect-1280/560">
         <div className="absolute left-0 top-0 w-full h-full rounded-[15px]">
           <Image

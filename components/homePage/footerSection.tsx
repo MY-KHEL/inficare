@@ -11,7 +11,7 @@ import { Button, Heading, Paragraph } from "../ui/typography";
 import React, { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { start } from "repl";
+
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 
