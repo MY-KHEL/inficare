@@ -223,7 +223,7 @@ gsap.fromTo(element.current, {
 
      mm.add("(max-width: 767px)", () => {
       if (heroLeftSection.current) {
-        imageTl.fromTo(
+        textTl.fromTo(
           heroLeftSection.current,
           {
             opacity: 0,
@@ -232,7 +232,7 @@ gsap.fromTo(element.current, {
           {
             opacity: 1,
             scale: 1,
-            duration:1
+            duration:.5
             
            
 
@@ -431,7 +431,7 @@ gsap.fromTo(element.current, {
             className="object-contain"
           />
         </div>
-        <div className="md:absolute  w-full max-w-[558px] md:-bottom-15 md:left-1/2 md:-translate-x-1/2   aspect-558/812 z-20 ">
+        <div className="lg:absolute  w-full max-w-[558px] lg:-bottom-15 lg:left-1/2 lg:-translate-x-1/2   aspect-558/812 z-20 ">
           <Image
             src={"/pngs/herodoctor.png"}
             alt="hero doctor"
@@ -452,7 +452,7 @@ gsap.fromTo(element.current, {
             <EmailIcon width={24} height={24} className="max-md:w-5" />
           </div>
 
-          <div className="w-full absolute rounded-[15px]  bottom-6 md:bottom-50 shadow-md -left-4 md:-left-30 max-w-[190px] md:max-w-[241px] py-[7.5px] md:py-[13px] bg-white px-[9.5px] md:px-[29px]" ref={doctorProfileRef}>
+          <div className="w-full absolute rounded-[15px]  bottom-6 lg:bottom-50 shadow-md -left-4 lg:-left-30 max-w-[190px] lg:max-w-[241px] py-[7.5px] md:py-[13px] bg-white px-[9.5px] md:px-[29px]" ref={doctorProfileRef}>
             <div className="flex gap-3.5 items-center">
               <div className="w-12.5 relative aspect-square ">
                 <Image
