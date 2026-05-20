@@ -11,8 +11,9 @@ gsap.registerPlugin(ScrollTrigger)
 
 
 export function HighlightSection() {
-  const imageRef =useRef<HTMLDivElement | null >(null)
-  const highlightRef = useRef<HTMLDivElement | null>(null)
+const imageRef =useRef<HTMLDivElement | null >(null)
+const desktopHighlightRef = useRef<HTMLDivElement | null>(null);
+const mobileHighlightRef = useRef<HTMLDivElement | null>(null);
   const subHeading = (
     <p>
       Infi-Care securely stores your diagnoses, prescriptions, and consultation
@@ -27,49 +28,70 @@ export function HighlightSection() {
     "Updated after every consultation.",
     "Accessible anytime you need it.",
   ];
-    useEffect(() => {
-    if (!imageRef.current || !highlightRef.current) return;
-  
-    // Image animation
-    gsap.fromTo(
-      imageRef.current,
-      {
-        opacity: 0,
-        x: 2000,
+useEffect(() => {
+  if (!imageRef.current) return;
+
+  // Image animation
+  gsap.fromTo(
+    imageRef.current,
+    {
+      opacity: 0,
+      x: 2000,
+    },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: imageRef.current,
+        start: "top 90%",
+        end: "top 40%",
+        scrub: true,
       },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: imageRef.current,
-          start: "top 90%",
-         end:"top 40%",
-         scrub:true
-        },
-      }
+    }
+  );
+
+  // Desktop cards
+  if (desktopHighlightRef.current) {
+    const desktopCards = gsap.utils.toArray(
+      desktopHighlightRef.current.children
     );
-  
-    // Get cards AFTER ref exists
-    const cards = gsap.utils.toArray(highlightRef.current.children);
-  
-    // Stagger cards
-    gsap.from(cards, {
+
+    gsap.from(desktopCards, {
       opacity: 0,
       y: 60,
-      duration: 0.8,
       stagger: 0.2,
       ease: "power3.out",
       scrollTrigger: {
-        trigger: highlightRef.current,
+        trigger: desktopHighlightRef.current,
         start: "top 80%",
         end: "top 60%",
-        // markers:true,
-        scrub:true
+        scrub: true,
       },
     });
-  }, []);
+  }
+
+  // Mobile cards
+  if (mobileHighlightRef.current) {
+    const mobileCards = gsap.utils.toArray(
+      mobileHighlightRef.current.children
+    );
+
+    gsap.from(mobileCards, {
+      opacity: 0,
+      y: 60,
+      stagger: 0.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: mobileHighlightRef.current,
+        start: "top 80%",
+        end: "top 60%",
+        scrub: true,
+      },
+    });
+  }
+}, []);
   return (
     <section className="px-[20px] md:px-[79px] relative py-[25px] md:py-22.5 flex max-md:flex-col gap-7.5 md:justify-between items-center overflow-hidden">
       <div className="max-w-[518px] w-full flex flex-col gap-9">
@@ -78,7 +100,7 @@ export function HighlightSection() {
           subHeading={subHeading}
           className=""
         />
-        <div className="flex flex-col max-md:hidden gap-6.5 "   >
+        <div className="flex flex-col max-md:hidden gap-6.5" ref={desktopHighlightRef} >
           {highLights.map((highlight, index) => (
             <div className="flex gap-2.5 items-center" key={index}>
               <GreenTick />
@@ -90,7 +112,7 @@ export function HighlightSection() {
       <div className="w-full aspect-707/496 relative " ref={imageRef} >
       <Image src={'/pngs/dashboardlook.png'} alt="dashboard look" fill className="object-cover"/>
       </div>
-      <div className="flex flex-col w-full md:hidden z-20 gap-2 md:gap-6.5" ref={highlightRef}>
+      <div className="flex flex-col w-full md:hidden z-20 gap-2 md:gap-6.5" ref={mobileHighlightRef}>
           {highLights.map((highlight, index) => (
             <div className="flex gap-[5px] md:gap-2.5 items-center" key={index}>
               <GreenTick className="max-md:w-2.5" />

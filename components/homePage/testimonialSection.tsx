@@ -87,7 +87,7 @@ export function TestimonialSection() {
       {
         opacity: 1,
         y: 0,
-        stagger: 0.2,
+        stagger: 1,
         ease: "power3.out",
       },
     );
@@ -149,12 +149,12 @@ export function TestimonialSection() {
           </div>
         </div>
         <div
-          className="md:max-w-[697px] z-20 max-md:hidden w-full overflow-auto flex max-md:pr-5  md:grid grid-cols-2 gap-[14px] md:gap-9   "
+          className="md:max-w-[697px] z-20 max-md:hidden w-full overflow-auto flex max-md:pr-5  md:grid grid-cols-2 gap-[14px] md:gap-9  p-2  "
           ref={testimonialRef}
         >
           {testimonials.map((testimonial, index) => (
             <div
-              className="p-5 flex flex-col gap-3 md:gap-[35px] justify-between max-md:min-w-[247px]  md:max-w-[331px]  w-full  bg-white rounded-[15px] border-[0.5px] border-[#8E98A8B2]"
+              className="p-5 flex flex-col gap-3 md:gap-[35px] justify-between max-md:min-w-[247px]  md:max-w-[331px]  w-full  hover:shadow-md shadow-blue-500/70  bg-white rounded-[15px] border-[0.5px] border-[#8E98A8B2] cursor-pointer hover:border-none"
               key={index}
             >
               <div className="flex flex-col gap-[25px]">
@@ -192,7 +192,7 @@ export function TestimonialSection() {
           <Heading title="Trusted by people like you" subHeading={subHeading} />
 
           <div className="flex gap-2.5">
-            <div className="flex ">
+            <div className="flex" ref={imageRef}>
               {testimonials.map((testimonial, index) => (
                 <div
                   className={` ${index < 1 ? "ml-0" : "-ml-4"} w-12.5 relative aspect-square rounded-full bg-[#2563EB] `}
@@ -207,7 +207,7 @@ export function TestimonialSection() {
                 </div>
               ))}
             </div>
-            <Paragraph className="font-semibold">
+            <Paragraph className="font-semibold" ref={textRef}>
               More than 500+ <br /> Trusted Infi-Care{" "}
             </Paragraph>
           </div>

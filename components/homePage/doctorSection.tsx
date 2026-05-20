@@ -29,7 +29,7 @@ export function DoctorSection() {
             scrollTrigger:{
               trigger:buttonRef.current,
               start:"top 80%",
-              end:"bottom center",
+              end:"bottom 80%",
               // markers:true,
               scrub:true
             }
@@ -90,9 +90,9 @@ export function DoctorSection() {
             <p className="text-[#061A46] max-md:text-[10px] font-semibold">Trusted Specialists</p>
           </div>
         </div>
-        <div className="flex max-md:hidden gap-[22px] justify-between w-full overflow-x-auto">
+        <div className="flex max-md:hidden gap-[22px] p-4 justify-between w-full overflow-x-auto">
           {doctorProfiles.map((profile, index) => (
-            <div className="rounded-[15px]" key={index}>
+            <div className="rounded-[15px] bg-white hover:shadow-md shadow-blue-500/70 hover:scale-102 cursor-pointer " key={index}>
               <div className="relative aspect-298/322  h-full  max-h-[227px] md:max-h-[322px] w-[233px] md:w-[298px]">
                 <Image
                   src={profile.imageLink}
@@ -101,7 +101,7 @@ export function DoctorSection() {
                   className="object-cover rounded-t-[15px]"
                 />
               </div>
-              <div className="p-4  bg-white">
+              <div className="p-4  ">
                 <div className="flex justify-between">
                   <h3 className="text-[#061A46CC] max-md:text-[14px] font-semibold text-lg ">
                     {profile.fullName}
@@ -112,6 +112,7 @@ export function DoctorSection() {
                       color="#FFD70099"
                       fill="#FFD70099"
                       className="inline"
+                      size={18}
                     />{" "}
                     {profile.rating} ({profile.amountOfRatings}){" "}
                   </Paragraph>
